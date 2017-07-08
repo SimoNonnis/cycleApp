@@ -7,14 +7,16 @@ export function App ({ DOM }) {
   const minus$ = DOM.select('.minus').events('click').mapTo(-1);
 
   // STATE
+  const number$ = xs.merge(plus$, minus$)
+    .fold((prev, curr) => prev + curr, 0);
 
   // VDOM
   return {
-    DOM: xs.of(
+    DOM: number$.map( n =>
       div([
         button('.plus', 'Increment'),
         button('.minus', 'Decrement'),
-        p('0'),
+        p(String(n)),
       ])
     )
   }
