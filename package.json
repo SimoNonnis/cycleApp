@@ -9,6 +9,7 @@
     "@cycle/dom": "^17.5.0",
     "@cycle/http": "^13.3.0",
     "@cycle/run": "^3.1.0",
+    "@cycle/time": "^0.8.0",
     "xstream": "^10.8.0"
   },
   "scripts": {
