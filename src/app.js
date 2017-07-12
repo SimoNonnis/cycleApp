@@ -1,4 +1,4 @@
-import {div, h1, label, p, input, hr, ul, li } from '@cycle/dom';
+import {div, h1, label, p, input, hr, ul, li, a } from '@cycle/dom';
 import xs from 'xstream';
 
 const category = 'github';
@@ -16,13 +16,13 @@ export function App ({ DOM, HTTP, time }) {
       .filter( query => query[0].length > 0)
       .compose(time.debounce(500))
       .map(([desc, lang, stars]) => {
-        const tearms = [search];
+        const terms = [desc];
 
         if (isNumeric(stars)) {
           terms.push(`stars:">=${stars}"`);
         }
-        if (language !== '') {
-          terms.push(`language:"${language}"`);
+        if (lang !== '') {
+          terms.push(`language:"${lang}"`);
         }
         return {
           q: terms.join(' ')
@@ -55,8 +55,8 @@ function labeledField(labelText, selector, inputType) {
   ])
 }
 
-function view(Results$) {
-  return Results$.map((results) =>
+function view(results$) {
+  return results$.map((results) =>
     div([
       div([
         h1('Github Search'),
