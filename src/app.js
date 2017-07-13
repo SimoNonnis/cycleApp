@@ -1,5 +1,7 @@
-import {div, h1, label, p, input, hr, ul, li, a } from '@cycle/dom';
+import {div, h1, p, hr, ul, li, a } from '@cycle/dom';
 import xs from 'xstream';
+
+import labeledField from './components/labeledField';
 
 const category = 'github';
 
@@ -33,7 +35,7 @@ export function App ({ DOM, HTTP, time }) {
         query,
         category
       }))
-      .debug('criteria');
+      .debug('Query');
 
   const searchResults$ = HTTP.select(category)
     .flatten()
@@ -45,14 +47,6 @@ export function App ({ DOM, HTTP, time }) {
     DOM: view(searchResults$),
     HTTP: searchRequest$,
   }
-}
-
-// Components
-function labeledField(labelText, selector, inputType) {
-  return label([
-    p(labelText),
-    input(selector, { attrs: { type: inputType }}),
-  ])
 }
 
 function view(results$) {
